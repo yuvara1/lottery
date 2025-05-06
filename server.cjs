@@ -87,7 +87,7 @@ app.put('/data/:id', async (req, res) => {
      try {
           connection = await db.getConnection();
           const query = 'UPDATE results SET draw_no = ?,  first_prize = ?, second_prize = ?, third_prize = ?,draw_date = ? WHERE id = ?';
-          const values = [draw_no, first, second, third, draw_date id];
+          const values = [draw_no, first, second, third, draw_date ,id];
           await connection.query(query, values);
           res.status(200).json({ message: 'Data updated successfully' });
      } catch (error) {
