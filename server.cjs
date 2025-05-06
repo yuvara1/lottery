@@ -34,12 +34,12 @@ app.use(express.json());
 
 // POST endpoint to insert data
 app.post('/values', async (req, res) => {
-     const { id, draw_no, first, second, third } = req.body;
+     const { id, draw_no, first, second, third,draw_date } = req.body;
      let connection;
      try {
           connection = await db.getConnection();
-          const query = 'INSERT INTO results (id, draw_no, first, second, third) VALUES (?, ?, ?, ?, ?)';
-          const values = [id, draw_no, first, second, third];
+          const query = 'INSERT INTO results (id, draw_no, first, second, third,draw_date) VALUES (?, ?, ?, ?, ?,?)';
+          const values = [id, draw_no, first, second, third,date];
           await connection.query(query, values);
           res.status(201).json({ message: 'Data inserted successfully' });
      } catch (error) {
@@ -57,7 +57,7 @@ app.get('/data', async (req, res) => {
           connection = await db.getConnection();
           const query = 'SELECT * FROM results;';
           const [rows] = await connection.query(query);
-          console.log('Fetched data:', rows); // Debugging log
+        //  console.log('Fetched data:', rows); 
           res.status(200).json(rows);
      } catch (error) {
           console.error('Error fetching data:', error);
@@ -82,12 +82,12 @@ app.put('/data/:id', async (req, res) => {
      console.log('Received PUT request:', req.body); // Debugging log
      console.log('Received ID:', req.params.id); // Debugging log
      const { id } = req.params;
-     const { draw_no, first, second, third } = req.body;
+     const { draw_no, first, second, third,draw_date } = req.body;
      let connection;
      try {
           connection = await db.getConnection();
-          const query = 'UPDATE results SET draw_no = ?,  first_prize = ?, second_prize = ?, third_prize = ? WHERE id = ?';
-          const values = [draw_no, first, second, third, id];
+          const query = 'UPDATE results SET draw_no = ?,  first_prize = ?, second_prize = ?, third_prize = ?,draw_date = ? WHERE id = ?';
+          const values = [draw_no, first, second, third, draw_date id];
           await connection.query(query, values);
           res.status(200).json({ message: 'Data updated successfully' });
      } catch (error) {
