@@ -72,7 +72,9 @@ app.get("/getall", async (req, res) => {
 // POST endpoint for admin login
 app.post('/login', async (req, res) => {
      const { username, password } = req.body;
-     if (username === 'admin' && password === 'admin123') {
+     if (username === 'chandru' && password === 'chandru@07'
+          || username === 'yuvi' && password === 'yuvi123'
+     ) {
           res.status(200).json({ success: true });
      } else {
           res.status(401).json({ success: false, message: 'Invalid credentials' });
